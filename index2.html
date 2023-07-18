@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: #ebffe1;
+    }
+  </style>
+  <script>
+
+  // document.addEventListener('DOMContentLoaded', () => {
+    // console.log('loaded');
+  window.onmessage = function(e) {
+    console.log('child: ', e);
+  
+    if (e.data.flag === 'parent_send') {
+      const input = document.getElementById('child_value');
+      input.value = e.data.value;
+      alert(`Parent says: ${e.data.value}`);
+    }
+  };
+  // });
+
+  function clickme() {
+    const input = document.getElementById('child_value');
+    console.log(input.value);
+    const obj = {
+      value: input.value,
+      flag: 'child_send',
+    }
+    window.top.postMessage(obj, 'https://3bc3-114-34-66-247.ngrok-free.app/')
+  }
+  
+
+  </script>
+</head>
+<body>
+  this is child frame with iFrame
+  <br>
+  <input id="child_value" value="" />
+  <br>
+  <button onclick="clickme()">Send Message to Parent</button>
+</body>
+</html>

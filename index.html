@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: #efefef;
+    }
+  </style>
+  <script>
+
+  window.onmessage = function (e) {
+    console.log('parent: ', e);
+    if (e.data.flag == 'child_send') {
+      alert(`Child says: ${e.data.value}`);
+      document.getElementById('child_value').value = e.data.value;
+    }
+  };
+
+  function clickmetochild() {
+    const myIframe = document.getElementById('myIframe');
+    const input = document.getElementById('child_value');
+    const obj = {
+      value: input.value,
+      flag: 'parent_send',
+    }
+    myIframe.contentWindow.postMessage(obj, 'http://localhost:8000');
+  }
+
+  </script>
+</head>
+<body>
+  <button onclick="clickmetochild()">Send Message to child</button>
+  <input id="child_value" value="" />
+  <br>
+  <br>
+  <iframe
+  id="myIframe"
+  src="http://localhost:8000/index2.html"
+  frameborder="0"
+></iframe>
+</body>
+</html>
