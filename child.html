@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Child frame with iFrame</title>
   <style>
     body {
       background: #ebffe1;
@@ -11,8 +11,6 @@
   </style>
   <script>
 
-  // document.addEventListener('DOMContentLoaded', () => {
-    // console.log('loaded');
   window.onmessage = function(e) {
     console.log('child: ', e);
   
@@ -22,7 +20,6 @@
       alert(`Parent says: ${e.data.value}`);
     }
   };
-  // });
 
   function clickme() {
     const input = document.getElementById('child_value');
